@@ -1,22 +1,22 @@
-import * as THREE from "three";
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-let Scene = new THREE.Scene();
-let Camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { OverlayColor } from "./TextureTools/OverlayColor";
+import { PerspectiveCamera, ShaderMaterial, Scene, WebGLRenderer, BoxGeometry, TextureLoader, Mesh } from "three";
+
+let scene = new Scene();
+let Camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 Camera.position.z = 2
 
-let Renderer = new THREE.WebGLRenderer();
+let Renderer = new WebGLRenderer();
 let Controls = new OrbitControls(Camera, Renderer.domElement);
-let Geometry = new THREE.BoxGeometry()
+let Geometry = new BoxGeometry()
 
-let map = new THREE.TextureLoader().load('./images/testTexture.png');
-let Material = new THREE.MeshBasicMaterial({
-    
-    map: map,
-});
+let map = new TextureLoader().load('./images/testTexture.png');
 
-let Cube = new THREE.Mesh(Geometry, Material)
-Scene.add(Cube)
+let CurrentMaterial = OverlayColor(map);
+
+let Cube = new Mesh(Geometry, CurrentMaterial)
+scene.add(Cube)
 
 
 window.onload = () => {
@@ -53,7 +53,7 @@ const onWindowResize = () => {
 }
 
 function Render() {
-    Renderer.render(Scene, Camera);
+    Renderer.render(scene, Camera);
 }
 
 window.addEventListener('resize', onWindowResize, false);

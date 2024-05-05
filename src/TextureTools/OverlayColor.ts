@@ -1,12 +1,41 @@
-import { Color, Material, Object3D, Texture } from "three";
+import { Color, IUniform, ImageUtils, ShaderMaterial, Texture, TextureLoader, UniformsUtils  } from "three";
 
 /**
- * 
+ * TODO use a shader material instead.
  * @param color 
  */
-export const OverlayColor = (Material: Material, color: Color) : void => {
+export const OverlayColor = (texture: Texture) : ShaderMaterial => {
 
-    //Confirm material has texture
-   
+    const vertexShader = /*glsl*/`
+        varying vec2 vUv;
+        void main() {
+            
 
+            vUv = uv;
+
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+    `;
+
+    const fragmentShader = /*glsl*/`
+        uniform sampler2D texture1;
+
+        varying vec2 vUv;
+
+        void main() {
+            gl_FragColor = texture2D(texture1, vUv);
+        }
+    `;
+
+
+	const material = new ShaderMaterial( { 
+        uniforms: {
+           texture1: {
+                value: texture
+           }
+        }, 
+    vertexShader: vertexShader, 
+    fragmentShader: fragmentShader } );
+	
+	return material;
 }
