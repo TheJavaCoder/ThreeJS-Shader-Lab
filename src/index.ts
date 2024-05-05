@@ -8,10 +8,12 @@ Camera.position.z = 2
 let Renderer = new THREE.WebGLRenderer();
 let Controls = new OrbitControls(Camera, Renderer.domElement);
 let Geometry = new THREE.BoxGeometry()
+
+let map = new THREE.TextureLoader().load('./images/testTexture.png');
 let Material = new THREE.MeshBasicMaterial({
-    color: 0x00ff00,
-    wireframe: true,
-})
+    
+    map: map,
+});
 
 let Cube = new THREE.Mesh(Geometry, Material)
 Scene.add(Cube)
