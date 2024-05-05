@@ -1,11 +1,13 @@
-import { Color, IUniform, ImageUtils, ShaderMaterial, Texture, TextureLoader, UniformsUtils  } from "three";
+import { Color, IUniform, ImageUtils, ShaderMaterial, Texture, TextureLoader, UniformsUtils, Vector4  } from "three";
 
 /**
- * TODO use a shader material instead.
+ * 
+ * @param texture 
  * @param color 
+ * @param opacity 
+ * @returns 
  */
-export const OverlayColor = (texture: Texture) : ShaderMaterial => {
-
+export const OverlayColor = (texture: Texture, color: Color, opacity: number) : ShaderMaterial => {
     const vertexShader = /*glsl*/`
         varying vec2 vUv;
         void main() {
@@ -19,11 +21,12 @@ export const OverlayColor = (texture: Texture) : ShaderMaterial => {
 
     const fragmentShader = /*glsl*/`
         uniform sampler2D texture1;
+        uniform vec4 color;
 
         varying vec2 vUv;
 
         void main() {
-            gl_FragColor = texture2D(texture1, vUv);
+            gl_FragColor = mix(texture2D(texture1, vUv), color, color.a);
         }
     `;
 
@@ -32,6 +35,9 @@ export const OverlayColor = (texture: Texture) : ShaderMaterial => {
         uniforms: {
            texture1: {
                 value: texture
+           },
+           color: {
+                value: new Vector4(color.r, color.g, color.b, opacity)
            }
         }, 
     vertexShader: vertexShader, 

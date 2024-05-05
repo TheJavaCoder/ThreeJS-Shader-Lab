@@ -10,7 +10,7 @@ var Renderer = new three_1.WebGLRenderer();
 var Controls = new OrbitControls_1.OrbitControls(Camera, Renderer.domElement);
 var Geometry = new three_1.BoxGeometry();
 var map = new three_1.TextureLoader().load('./images/testTexture.png');
-var CurrentMaterial = (0, OverlayColor_1.OverlayColor)(map);
+var CurrentMaterial = (0, OverlayColor_1.OverlayColor)(map, new three_1.Color(0x3366ff), 0.5);
 var Cube = new three_1.Mesh(Geometry, CurrentMaterial);
 scene.add(Cube);
 window.onload = function () {
