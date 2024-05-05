@@ -1,7 +1,7 @@
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { OverlayColor } from "./TextureTools/OverlayColor";
-import { PerspectiveCamera, ShaderMaterial, Scene, WebGLRenderer, BoxGeometry, TextureLoader, Mesh, Color } from "three";
+import { OverlayColor } from "./Shaders/OverlayColor";
+import { PerspectiveCamera, Scene, WebGLRenderer, BoxGeometry, TextureLoader, Mesh, Color } from "three";
 
 let scene = new Scene();
 let Camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
