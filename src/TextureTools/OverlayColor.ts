@@ -12,7 +12,6 @@ export const OverlayColor = (texture: Texture, color: Color, opacity: number) : 
         varying vec2 vUv;
         void main() {
             
-
             vUv = uv;
 
             gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
@@ -41,7 +40,8 @@ export const OverlayColor = (texture: Texture, color: Color, opacity: number) : 
            }
         }, 
     vertexShader: vertexShader, 
-    fragmentShader: fragmentShader } );
+    fragmentShader: fragmentShader,
+    });
 	
 	return material;
 }

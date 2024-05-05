@@ -1,6 +1,6 @@
-# ThreeJS-project-template
+# ThreeJS-Shader-Lab
 
-This project is all the boiler plate required for a threeJS typescript project.
+This project is for experimenting with ThreeJS Shaders
 
 Compiling Typescript and Bundling with Webpack: npm run build
 
