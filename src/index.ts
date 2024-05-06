@@ -2,6 +2,7 @@
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { OverlayColor } from "./Shaders/OverlayColor";
 import { PerspectiveCamera, Scene, WebGLRenderer, BoxGeometry, TextureLoader, Mesh, Color } from "three";
+import { InvertColor } from './Shaders/InvertColors';
 
 let scene = new Scene();
 let Camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -12,7 +13,8 @@ let Controls = new OrbitControls(Camera, Renderer.domElement);
 let Geometry = new BoxGeometry()
 
 let map = new TextureLoader().load('./images/testTexture.png');
-let CurrentMaterial = OverlayColor(map, new Color( 0x3366ff ), 0.5);
+// let CurrentMaterial = OverlayColor(map, new Color( 0x3366ff ), 0.5);
+let CurrentMaterial = InvertColor(map);
 
 let Cube = new Mesh(Geometry, CurrentMaterial)
 scene.add(Cube)
